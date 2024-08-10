@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person</title>
+</head>
+<body>
+
+<!--remake it in order to person will be an object-->
+<p th:text="${person.getName() + ', ' + person.getYear()}">Value</p>
+<hr/>
+<div th:if="${owned.isEmpty()}" th:text="'The person has not picked up a single book yet'"> </div>
+<div th:if="${not owned.isEmpty()}">
+    <div th:each="book : ${owned}">
+        <div th:text="${book.getTitle()} + ', ' + ${book.getAuthor()} + ', ' + ${book.getYearOfProduction()}"></div>
+    </div>
+</div>
+
+<hr/>
+
+<a th:href="@{/people/{id}/edit(id=${person.getPerson_id()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPerson_id()})}" th:object="${person}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>
